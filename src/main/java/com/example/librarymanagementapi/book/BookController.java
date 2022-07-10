@@ -20,7 +20,7 @@ public class BookController implements BookApi {
         this.bookService = bookService;
     }
 
-    public List<Book> getAllBooks() {
+    public List<Book> getBooks() {
         return bookService.getAllBooks();
     }
 

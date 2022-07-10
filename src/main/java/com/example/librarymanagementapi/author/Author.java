@@ -17,7 +17,7 @@ public class Author {
     private String firstName;
     private String lastName;
 
-    @JsonIgnore //to solve the problem for method "List<Author> getAllAuthors()" of AuthorController
+    @JsonIgnore //to solve the problem for method "List<Author> getAuthors()" of AuthorController
     @OneToMany(
             mappedBy = "author",
             cascade = CascadeType.ALL

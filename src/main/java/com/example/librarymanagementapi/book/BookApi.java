@@ -16,7 +16,7 @@ public interface BookApi {
     GetBookDto getBookById(@PathVariable Long id);
 
     @GetMapping
-    List<Book> getAllBooks();
+    List<Book> getBooks();
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 //    @ExceptionHandler

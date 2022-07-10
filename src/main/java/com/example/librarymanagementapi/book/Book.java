@@ -2,6 +2,7 @@ package com.example.librarymanagementapi.book;
 
 import com.example.librarymanagementapi.author.Author;
 import com.example.librarymanagementapi.category.Category;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,9 +19,11 @@ public class Book {
     private String title;
     private String description;
     private LocalDateTime timeAdded;
+    @JsonIgnore //to solve the problem for method "public List<Book> getBooks()" of BookController
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Author author;
+    @JsonIgnore //to solve the problem for method "public List<Book> getBooks()" of BookController
     //book can have one category or more for example romance and fantasy
     @ManyToMany //the owner of relation
     @JoinTable(name = "category_book")
