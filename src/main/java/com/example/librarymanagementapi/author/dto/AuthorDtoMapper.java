@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 public class AuthorDtoMapper {
 
     public GetAuthorDto map(Author author) {
-        GetAuthorDto dto = new GetAuthorDto();
-        dto.setId(author.getId());
-        dto.setFirstName(author.getFirstName());
-        dto.setLastName(author.getLastName());
-        return dto;
+        GetAuthorDto getAuthorDto = new GetAuthorDto();
+        getAuthorDto.setId(author.getId());
+        getAuthorDto.setFirstName(author.getFirstName());
+        getAuthorDto.setLastName(author.getLastName());
+        return getAuthorDto;
     }
 
     public Author map(FillAuthorDto fillAuthorDto) {

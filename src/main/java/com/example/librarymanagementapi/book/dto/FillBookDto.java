@@ -1,12 +1,18 @@
 package com.example.librarymanagementapi.book.dto;
 
-import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
-
 public class FillBookDto {
+    //    @Size(min=5,max = 63)
     private String title;
     private String description;
     private Long authorId;
+
+    public Long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
 
     public String getTitle() {
         return title;
@@ -22,13 +28,5 @@ public class FillBookDto {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Long getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(Long authorId) {
-        this.authorId = authorId;
     }
 }

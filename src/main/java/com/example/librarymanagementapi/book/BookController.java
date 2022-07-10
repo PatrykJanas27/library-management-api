@@ -1,8 +1,11 @@
 package com.example.librarymanagementapi.book;
 
-import com.example.librarymanagementapi.book.dto.BookDto;
+import com.example.librarymanagementapi.book.dto.FillBookDto;
+import com.example.librarymanagementapi.book.dto.GetBookDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -17,17 +20,16 @@ public class BookController implements BookApi {
         this.bookService = bookService;
     }
 
-    public List<Book> getAllBooks(){
+    public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
-    public Book getBookById(@PathVariable Long id) {
+    public GetBookDto getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
 
-
-    public ResponseEntity<BookDto> saveBook(@RequestBody @Valid BookDto bookDto){
-        BookDto savedBook = bookService.saveBook(bookDto);
+    public ResponseEntity<GetBookDto> saveBook(@RequestBody @Valid FillBookDto fillBookDto) {
+        GetBookDto savedBook = bookService.saveBook(fillBookDto);
         URI savedBookUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedBook.getId())

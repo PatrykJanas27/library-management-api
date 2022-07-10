@@ -12,28 +12,30 @@ public class BookDtoMapper {
     public BookDtoMapper(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-    //from entity to DTO
-    public BookDto map(Book book){
-        BookDto dto = new BookDto();
-        dto.setId(book.getId());
-        dto.setTitle(book.getTitle());
-        dto.setDescription(book.getDescription());
-        dto.setLocalDateTime(book.getTimeAdded());
-        dto.setAuthorId(book.getAuthor().getId());
-        dto.setAuthorFirstName(book.getAuthor().getFirstName()); //splaszczenie zagniezdzenia do wyswietlania
-        dto.setAuthorLastName(book.getAuthor().getLastName());
-        return dto;
+
+    public GetBookDto map(Book book) {
+        GetBookDto getBookDto = new GetBookDto();
+        getBookDto.setId(book.getId());
+        getBookDto.setTitle(book.getTitle());
+        getBookDto.setDescription(book.getDescription());
+        getBookDto.setLocalDateTime(book.getTimeAdded());
+        getBookDto.setAuthorId(book.getAuthor().getId());
+        getBookDto.setAuthorFirstName(book.getAuthor().getFirstName());
+        getBookDto.setAuthorLastName(book.getAuthor().getLastName());
+        return getBookDto;
     }
 
-    //from DTO to entity
-    public Book map(BookDto dto){
+    public Book map(FillBookDto fillBookDto) {
         Book book = new Book();
-        book.setTitle(dto.getTitle());
-        book.setDescription(dto.getDescription());
-        authorRepository.findById(dto.getAuthorId())
+        book.setTitle(fillBookDto.getTitle());
+        book.setDescription(fillBookDto.getDescription());
+        //if author with such id exist then save the book, otherwise throw an exception
+        authorRepository.findById(fillBookDto.getAuthorId())
                 .ifPresentOrElse(book::setAuthor,
-                        () ->{ throw new NotFoundException("Author with id " + dto.getAuthorId() + " is not exists");}
-                ); //jesli taki autor z takim id istnieje to przypisz tego autora do ksiazki
+                        () -> {
+                            throw new NotFoundException("Author with id " + fillBookDto.getAuthorId() + " is not exists");
+                        }
+                );
         return book;
     }
 

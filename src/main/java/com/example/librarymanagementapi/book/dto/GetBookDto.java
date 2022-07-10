@@ -1,28 +1,22 @@
 package com.example.librarymanagementapi.book.dto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-public class BookDto {
-//    @Min(1)
-//    @Max(30000)
+public class GetBookDto {
     private Long id;
-//    @Size(min=5,max = 63)
     private String title;
     private String description;
-    private LocalDateTime localDateTime;
+    private LocalDateTime timeAdded;
     private Long authorId;
     private String authorFirstName;
     private String authorLastName;
 
     public LocalDateTime getLocalDateTime() {
-        return localDateTime;
+        return timeAdded;
     }
 
-    public void setLocalDateTime(LocalDateTime localDateTime) {
-        this.localDateTime = localDateTime;
+    public void setLocalDateTime(LocalDateTime timeAdded) {
+        this.timeAdded = timeAdded;
     }
 
     public String getAuthorLastName() {

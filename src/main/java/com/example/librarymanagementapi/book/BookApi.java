@@ -1,6 +1,7 @@
 package com.example.librarymanagementapi.book;
 
-import com.example.librarymanagementapi.book.dto.BookDto;
+import com.example.librarymanagementapi.book.dto.FillBookDto;
+import com.example.librarymanagementapi.book.dto.GetBookDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,12 @@ import java.util.List;
 public interface BookApi {
 
     @GetMapping("/{id}")
-    Book getBookById(@PathVariable Long id);
+    GetBookDto getBookById(@PathVariable Long id);
+
     @GetMapping
     List<Book> getAllBooks();
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 //    @ExceptionHandler
-    ResponseEntity<BookDto> saveBook(@RequestBody @Valid BookDto bookDto);
+    ResponseEntity<GetBookDto> saveBook(@RequestBody @Valid FillBookDto fillBookDto);
 }

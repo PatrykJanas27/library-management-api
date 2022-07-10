@@ -2,11 +2,8 @@ package com.example.librarymanagementapi.book;
 
 import com.example.librarymanagementapi.author.Author;
 import com.example.librarymanagementapi.category.Category;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,29 +15,16 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
     private String title;
     private String description;
     private LocalDateTime timeAdded;
-    //the owner of relation
     @ManyToOne
     @JoinColumn(name = "author_id")
-//    @JsonIgnore //zeby nie bylo stack overFLowError - zapetlenie sie relacji
     private Author author;
     //book can have one category or more for example romance and fantasy
-    @ManyToMany
+    @ManyToMany //the owner of relation
     @JoinTable(name = "category_book")
     private List<Category> categories = new ArrayList<>();
-
-//    @JsonProperty
-//    String AuthorFirstName() {
-//        return author.getFirstName();
-//    }
-//
-//    @JsonProperty
-//    String AuthorLastName() {
-//        return author.getLastName();
-//    }
 
     public Book() {
     }
