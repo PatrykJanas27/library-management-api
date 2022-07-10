@@ -1,5 +1,6 @@
 package com.example.librarymanagementapi.author;
 
+import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import org.springframework.http.MediaType;
@@ -19,12 +20,16 @@ public class AuthorController implements AuthorApi {
     }
 
     //here is a little problem because of relation loop - an author has a List of books and books have the author
-    public List<Author> getAllAuthors(){
+    public List<Author> getAuthors(){
         return authorService.getAllAuthors();
     }
 
     public GetAuthorDto getAuthorById(@PathVariable Long id) {
         return authorService.getAuthorById(id);
+    }
+
+    public ResponseEntity<List<GetAuthorBookDto>> getBooksByAuthorId(@PathVariable Long id){
+        return ResponseEntity.ok(authorService.getBooksByAuthorId(id));
     }
 
     public ResponseEntity<GetAuthorDto> saveAuthor(@RequestBody FillAuthorDto fillAuthorDto){

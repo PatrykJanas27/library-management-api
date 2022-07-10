@@ -1,6 +1,7 @@
 package com.example.librarymanagementapi.author;
 
 import com.example.librarymanagementapi.author.dto.FillAuthorDto;
+import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +14,13 @@ import java.util.List;
 public interface AuthorApi {
 
     @GetMapping
-    List<Author> getAllAuthors();
+    List<Author> getAuthors();
 
     @GetMapping("/{id}")
     GetAuthorDto getAuthorById(@PathVariable Long id);
+
+    @GetMapping("/{id}/books")
+    ResponseEntity<List<GetAuthorBookDto>> getBooksByAuthorId(@PathVariable Long id);
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<GetAuthorDto> saveAuthor(@RequestBody FillAuthorDto fillAuthorDto);

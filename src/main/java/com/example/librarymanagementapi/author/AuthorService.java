@@ -1,5 +1,6 @@
 package com.example.librarymanagementapi.author;
 
+import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.author.dto.AuthorDtoMapper;
 import com.example.librarymanagementapi.author.dto.FillAuthorDto;
@@ -9,6 +10,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -30,6 +32,16 @@ public class AuthorService {
                 .orElseThrow(
                 () -> new NotFoundException("Author with id " + id + " is not exists")
         );
+    }
+
+    public List<GetAuthorBookDto> getBooksByAuthorId(Long authorId){
+        return authorRepository.findById(authorId)
+                .map(Author::getBooks)
+//                .orElse(Collections.emptyList())
+                .orElseThrow(() -> new NotFoundException("Author with id " + authorId + " is not exists"))
+                .stream()
+                .map(authorDtoMapper::mapAuthorToAuthorBookDto)
+                .toList();
     }
 
     @Transactional
