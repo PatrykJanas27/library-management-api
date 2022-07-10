@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorDtoMapper {
-    public Author map(AuthorDto dto){
+
+    //original author data
+    public Author map(GetAuthorDto dto){
         Author author = new Author();
         author.setId(dto.getId());
         author.setFirstName(dto.getFirstName());
@@ -13,11 +15,20 @@ public class AuthorDtoMapper {
         return  author;
     }
 
-    public AuthorDto map(Author author){
-        AuthorDto dto = new AuthorDto();
+    //to get/show data
+    public GetAuthorDto map(Author author){
+        GetAuthorDto dto = new GetAuthorDto();
         dto.setId(author.getId());
         dto.setFirstName(author.getFirstName());
         dto.setLastName(author.getLastName());
         return dto;
+    }
+
+    //to filling data
+    public Author map(FillAuthorDto fillAuthorDto){
+        Author author = new Author();
+        author.setFirstName(fillAuthorDto.getFirstName());
+        author.setLastName(fillAuthorDto.getLastName());
+        return author;
     }
 }

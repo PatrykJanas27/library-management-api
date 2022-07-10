@@ -1,7 +1,5 @@
 package com.example.librarymanagementapi.book;
 
-import com.example.librarymanagementapi.author.Author;
-import com.example.librarymanagementapi.author.dto.AuthorDto;
 import com.example.librarymanagementapi.book.dto.BookDto;
 import com.example.librarymanagementapi.book.dto.BookDtoMapper;
 import com.example.librarymanagementapi.exception.NotFoundException;

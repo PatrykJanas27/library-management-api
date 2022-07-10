@@ -1,6 +1,6 @@
 package com.example.librarymanagementapi.author.dto;
 
-public class AuthorDto {
+public class GetAuthorDto {
     private Long id;
     private String firstName;
     private String lastName;

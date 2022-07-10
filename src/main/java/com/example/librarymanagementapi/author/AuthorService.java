@@ -1,7 +1,8 @@
 package com.example.librarymanagementapi.author;
 
-import com.example.librarymanagementapi.author.dto.AuthorDto;
+import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.author.dto.AuthorDtoMapper;
+import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -24,7 +25,7 @@ public class AuthorService {
         return authorRepository.findAll();
     }
 
-    public AuthorDto getAuthorById(Long id) {
+    public GetAuthorDto getAuthorById(Long id) {
         return authorRepository.findById(id).map(authorDtoMapper::map)
                 .orElseThrow(
                 () -> new NotFoundException("Author with id " + id + " is not exists")
@@ -32,10 +33,10 @@ public class AuthorService {
     }
 
     @Transactional
-    AuthorDto saveAuthor(AuthorDto dto){
-        Author authorToSave = authorDtoMapper.map(dto);
+    GetAuthorDto saveAuthor(FillAuthorDto fillAuthorDto){
+        Author authorToSave = authorDtoMapper.map(fillAuthorDto);
         Author savedAuthor = authorRepository.save(authorToSave);
-        return authorDtoMapper.map(savedAuthor);
+       return authorDtoMapper.map(savedAuthor); //Author to AuthorDto (to showing/getting data)
     }
 
     @Transactional

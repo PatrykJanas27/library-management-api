@@ -1,7 +1,7 @@
 package com.example.librarymanagementapi.author;
 
-import com.example.librarymanagementapi.author.dto.AuthorDto;
-import org.springframework.http.HttpStatus;
+import com.example.librarymanagementapi.author.dto.GetAuthorDto;
+import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +25,14 @@ public class AuthorController {
     }
 
     @GetMapping("/{id}")
-    public AuthorDto getAuthorById(@PathVariable Long id) {
+    public GetAuthorDto getAuthorById(@PathVariable Long id) {
         return authorService.getAuthorById(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 //    @ResponseStatus(HttpStatus.CREATED) //status odpowiedzi jest juz na dole
-    ResponseEntity<AuthorDto> saveAuthor(@RequestBody AuthorDto authorDto){
-        AuthorDto savedAuthor = authorService.saveAuthor(authorDto);
+    ResponseEntity<GetAuthorDto> saveAuthor(@RequestBody FillAuthorDto fillAuthorDto){
+        GetAuthorDto savedAuthor = authorService.saveAuthor(fillAuthorDto);
         URI savedAuthorUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(savedAuthor.getId())
