@@ -11,27 +11,23 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/authors")
-public class AuthorController {
+public class AuthorController implements AuthorApi {
     private final AuthorService authorService;
 
     public AuthorController(AuthorService authorService) {
         this.authorService = authorService;
     }
 
-    @GetMapping
+    //here is a little problem because of relation loop - an author has a List of books and books have the author
     public List<Author> getAllAuthors(){
         return authorService.getAllAuthors();
     }
 
-    @GetMapping("/{id}")
     public GetAuthorDto getAuthorById(@PathVariable Long id) {
         return authorService.getAuthorById(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    @ResponseStatus(HttpStatus.CREATED) //status odpowiedzi jest juz na dole
-    ResponseEntity<GetAuthorDto> saveAuthor(@RequestBody FillAuthorDto fillAuthorDto){
+    public ResponseEntity<GetAuthorDto> saveAuthor(@RequestBody FillAuthorDto fillAuthorDto){
         GetAuthorDto savedAuthor = authorService.saveAuthor(fillAuthorDto);
         URI savedAuthorUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -39,7 +35,5 @@ public class AuthorController {
                 .toUri();
         return ResponseEntity.created(savedAuthorUri).body(savedAuthor);
     }
-
-
 
 }

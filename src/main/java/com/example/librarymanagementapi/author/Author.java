@@ -4,7 +4,6 @@ import com.example.librarymanagementapi.book.Book;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +17,7 @@ public class Author {
     private String firstName;
     private String lastName;
 
-//    @JsonIgnore //żeby nie pokazywalo books[] przy zapytaniu http://localhost:8080/authors
+    @JsonIgnore //to solve the problem for method "List<Author> getAllAuthors()" of AuthorController
     @OneToMany(
             mappedBy = "author",
             cascade = CascadeType.ALL
