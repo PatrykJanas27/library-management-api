@@ -22,15 +22,15 @@ public class AuthorService {
         this.authorDtoMapper = authorMapper;
     }
 
+    public List<Author> getAuthors() {
+        return authorRepository.findAll();
+    }
+
     public GetAuthorDto getAuthorById(Long id) {
         return authorRepository.findById(id).map(authorDtoMapper::map)
                 .orElseThrow(
                         () -> new NotFoundException("Author with id " + id + " is not exists")
                 );
-    }
-
-    public List<Author> getAllAuthors() {
-        return authorRepository.findAll();
     }
 
     public List<GetAuthorBookDto> getBooksByAuthorId(Long authorId) {

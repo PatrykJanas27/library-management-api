@@ -3,6 +3,7 @@ package com.example.librarymanagementapi.author;
 import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import java.util.List;
 public interface AuthorApi {
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     List<Author> getAuthors();
 
     @GetMapping("/{id}")

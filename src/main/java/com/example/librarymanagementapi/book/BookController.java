@@ -21,13 +21,13 @@ public class BookController implements BookApi {
     }
 
     @Override
-    public GetBookDto getBookById(@PathVariable Long id) {
-        return bookService.getBookById(id);
+    public List<Book> getBooks() {
+        return bookService.getBooks();
     }
 
     @Override
-    public List<Book> getBooks() {
-        return bookService.getAllBooks();
+    public GetBookDto getBookById(@PathVariable Long id) {
+        return bookService.getBookById(id);
     }
 
     @Override

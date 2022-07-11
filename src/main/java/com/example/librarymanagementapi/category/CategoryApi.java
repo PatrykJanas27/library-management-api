@@ -12,10 +12,12 @@ import java.util.List;
 @RequestMapping("/categories")
 public interface CategoryApi {
 
-    @GetMapping("/{id}")
-    GetCategoryDto getCategoryById(@PathVariable Long id);
-
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     List<Category> getCategories();
+
+    @GetMapping("/{id}")
+    GetCategoryDto getCategoryById(@PathVariable Long id);
+
+
 }

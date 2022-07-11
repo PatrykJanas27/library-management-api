@@ -20,15 +20,15 @@ public class CategoryService {
         this.categoryDtoMapper = categoryDtoMapper;
     }
 
+    public List<Category> getCategories() {
+        return categoryRepository.findAll();
+    }
+
     public GetCategoryDto getCategoryById(Long id) {
         return categoryRepository.findById(id).map(categoryDtoMapper::map)
                 .orElseThrow(
                         () -> new NotFoundException("Category with id " + id + " is not exists")
                 );
-    }
-
-    public List<Category> getAllCategories() {
-        return categoryRepository.findAll();
     }
 
     @Transactional

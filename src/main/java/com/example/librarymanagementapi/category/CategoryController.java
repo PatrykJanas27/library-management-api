@@ -14,12 +14,13 @@ public class CategoryController implements CategoryApi {
     }
 
     @Override
+    public List<Category> getCategories() {
+        return categoryService.getCategories();
+    }
+
+    @Override
     public GetCategoryDto getCategoryById(Long id) {
         return categoryService.getCategoryById(id);
     }
 
-    @Override
-    public List<Category> getCategories() {
-        return categoryService.getAllCategories();
-    }
 }
