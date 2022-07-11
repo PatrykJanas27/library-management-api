@@ -1,10 +1,15 @@
 package com.example.librarymanagementapi.category;
 
+import com.example.librarymanagementapi.author.Author;
+import com.example.librarymanagementapi.author.dto.FillAuthorDto;
+import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.category.dto.CategoryDtoMapper;
+import com.example.librarymanagementapi.category.dto.FillCategoryDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryBookDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -35,6 +40,13 @@ public class CategoryService {
                 .stream()
                 .map(categoryDtoMapper::mapCategoryToCategoryBookDto)
                 .toList();
+    }
+
+    @Transactional
+    GetCategoryDto saveCategory(FillCategoryDto fillCategoryDto) {
+        Category categoryToSave = categoryDtoMapper.map(fillCategoryDto);
+        Category savedCategory = categoryRepository.save(categoryToSave);
+        return categoryDtoMapper.map(savedCategory);
     }
 
 }
