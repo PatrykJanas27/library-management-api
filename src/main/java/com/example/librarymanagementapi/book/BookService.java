@@ -20,15 +20,15 @@ public class BookService {
         this.bookDtoMapper = bookDtoMapper;
     }
 
-    public List<Book> getAllBooks() {
-        return bookRepository.findAll();
-    }
-
     public GetBookDto getBookById(Long id) {
         return bookRepository.findById(id).map(bookDtoMapper::map)
                 .orElseThrow(
                         () -> new NotFoundException("Book with id " + id + " is not exists")
                 );
+    }
+
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
     }
 
     @Transactional

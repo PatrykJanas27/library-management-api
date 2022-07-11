@@ -1,16 +1,15 @@
 package com.example.librarymanagementapi.author;
 
-import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
-import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.author.dto.AuthorDtoMapper;
 import com.example.librarymanagementapi.author.dto.FillAuthorDto;
+import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
+import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,18 +22,18 @@ public class AuthorService {
         this.authorDtoMapper = authorMapper;
     }
 
-    public List<Author> getAllAuthors(){
-        return authorRepository.findAll();
-    }
-
     public GetAuthorDto getAuthorById(Long id) {
         return authorRepository.findById(id).map(authorDtoMapper::map)
                 .orElseThrow(
-                () -> new NotFoundException("Author with id " + id + " is not exists")
-        );
+                        () -> new NotFoundException("Author with id " + id + " is not exists")
+                );
     }
 
-    public List<GetAuthorBookDto> getBooksByAuthorId(Long authorId){
+    public List<Author> getAllAuthors() {
+        return authorRepository.findAll();
+    }
+
+    public List<GetAuthorBookDto> getBooksByAuthorId(Long authorId) {
         return authorRepository.findById(authorId)
                 .map(Author::getBooks)
 //                .orElse(Collections.emptyList())
@@ -45,19 +44,20 @@ public class AuthorService {
     }
 
     @Transactional
-    GetAuthorDto saveAuthor(FillAuthorDto fillAuthorDto){
+    GetAuthorDto saveAuthor(FillAuthorDto fillAuthorDto) {
         Author authorToSave = authorDtoMapper.map(fillAuthorDto);
         Author savedAuthor = authorRepository.save(authorToSave);
-       return authorDtoMapper.map(savedAuthor); //Author to AuthorDto (to showing/getting data)
+        return authorDtoMapper.map(savedAuthor); //Author to AuthorDto (to showing/getting data)
     }
 
     @Transactional
-    void save(Author author){
+    void save(Author author) {
         authorRepository.save(author);
     }
+
     @EventListener(ApplicationReadyEvent.class)
-    public void fillDB(){
-        save(new Author("Tomek","Baca"));
-        save(new Author("Patryk","Janas"));
+    public void fillDB() {
+        save(new Author("Tomek", "Baca"));
+        save(new Author("Patryk", "Janas"));
     }
 }

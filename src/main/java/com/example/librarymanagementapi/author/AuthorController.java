@@ -19,19 +19,23 @@ public class AuthorController implements AuthorApi {
         this.authorService = authorService;
     }
 
-    //here is a little problem because of relation loop - an author has a List of books and books have the author
-    public List<Author> getAuthors(){
-        return authorService.getAllAuthors();
-    }
-
+    @Override
     public GetAuthorDto getAuthorById(@PathVariable Long id) {
         return authorService.getAuthorById(id);
     }
 
+    //here is a little problem because of relation loop - an author has a List of books and books have the author
+    @Override
+    public List<Author> getAuthors(){
+        return authorService.getAllAuthors();
+    }
+
+    @Override
     public ResponseEntity<List<GetAuthorBookDto>> getBooksByAuthorId(@PathVariable Long id){
         return ResponseEntity.ok(authorService.getBooksByAuthorId(id));
     }
 
+    @Override
     public ResponseEntity<GetAuthorDto> saveAuthor(@RequestBody FillAuthorDto fillAuthorDto){
         GetAuthorDto savedAuthor = authorService.saveAuthor(fillAuthorDto);
         URI savedAuthorUri = ServletUriComponentsBuilder.fromCurrentRequest()

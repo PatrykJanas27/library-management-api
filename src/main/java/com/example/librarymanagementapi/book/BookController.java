@@ -20,14 +20,17 @@ public class BookController implements BookApi {
         this.bookService = bookService;
     }
 
-    public List<Book> getBooks() {
-        return bookService.getAllBooks();
-    }
-
+    @Override
     public GetBookDto getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
     }
 
+    @Override
+    public List<Book> getBooks() {
+        return bookService.getAllBooks();
+    }
+
+    @Override
     public ResponseEntity<GetBookDto> saveBook(@RequestBody @Valid FillBookDto fillBookDto) {
         GetBookDto savedBook = bookService.saveBook(fillBookDto);
         URI savedBookUri = ServletUriComponentsBuilder.fromCurrentRequest()
