@@ -1,11 +1,8 @@
 package com.example.librarymanagementapi.category.dto;
 
-import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.book.Book;
 import com.example.librarymanagementapi.category.Category;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
 
 @Service
 public class CategoryDtoMapper {
@@ -23,7 +20,7 @@ public class CategoryDtoMapper {
         return getCategoryDto;
     }
 
-    public GetCategoryBookDto mapCategoryToCategoryBookDto(Book book){
+    public GetCategoryBookDto mapCategoryToCategoryBookDto(Book book) {
         GetCategoryBookDto dto = new GetCategoryBookDto();
         dto.setId(book.getId());
         dto.setTitle(book.getTitle());

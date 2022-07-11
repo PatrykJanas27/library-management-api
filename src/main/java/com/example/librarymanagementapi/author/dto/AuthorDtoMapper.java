@@ -4,8 +4,6 @@ import com.example.librarymanagementapi.author.Author;
 import com.example.librarymanagementapi.book.Book;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 @Service
 public class AuthorDtoMapper {
 
@@ -24,7 +22,7 @@ public class AuthorDtoMapper {
         return author;
     }
 
-    public GetAuthorBookDto mapAuthorToAuthorBookDto(Book book){
+    public GetAuthorBookDto mapAuthorToAuthorBookDto(Book book) {
         GetAuthorBookDto dto = new GetAuthorBookDto();
         dto.setId(book.getId());
         dto.setTitle(book.getTitle());

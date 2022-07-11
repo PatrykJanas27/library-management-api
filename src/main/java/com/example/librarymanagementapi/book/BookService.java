@@ -36,6 +36,6 @@ public class BookService {
         Book bookToSave = bookDtoMapper.map(fillBookDto);
         bookToSave.setTimeAdded(LocalDateTime.now());
         Book savedBook = bookRepository.save(bookToSave);
-        return bookDtoMapper.map(savedBook); //Book to GetBookDto
+        return bookDtoMapper.map(savedBook);
     }
 }
