@@ -8,6 +8,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class CategoryService {
     private final CategoryRepository categoryRepository;
@@ -25,6 +27,9 @@ public class CategoryService {
                 );
     }
 
+    public List<Category> getAllCategories() {
+        return categoryRepository.findAll();
+    }
 
     @Transactional
     void save(Category category) {

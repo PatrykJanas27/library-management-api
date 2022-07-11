@@ -1,6 +1,7 @@
 package com.example.librarymanagementapi.category;
 
 import com.example.librarymanagementapi.book.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class Category {
     private Long id;
     private String name;
 
+    @JsonIgnore //to solve the problem for method "public List<Category> getCategories()" of CategoryController
     @ManyToMany(mappedBy = "categories")
     private List<Book> books = new ArrayList<>();
 
