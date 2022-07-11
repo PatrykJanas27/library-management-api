@@ -21,12 +21,12 @@ public class Book {
     private LocalDateTime timeAdded;
     @JsonIgnore //to solve the problem for method "public List<Book> getBooks()" of BookController
     @ManyToOne
-    @JoinColumn(name = "author_id")
+    @JoinColumn(name = "author_id") //the owner of relation
     private Author author;
     @JsonIgnore //to solve the problem for method "public List<Book> getBooks()" of BookController
     //book can have one category or more for example romance and fantasy
-    @ManyToMany //the owner of relation
-    @JoinTable(name = "category_book")
+    @ManyToMany
+    @JoinTable(name = "category_book") //the owner of relation
     private List<Category> categories = new ArrayList<>();
 
     public Book() {
