@@ -1,6 +1,7 @@
 package com.example.librarymanagementapi.category;
 
 import com.example.librarymanagementapi.category.dto.CategoryDtoMapper;
+import com.example.librarymanagementapi.category.dto.GetCategoryBookDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -29,6 +30,14 @@ public class CategoryService {
                 .orElseThrow(
                         () -> new NotFoundException("Category with id " + id + " is not exists")
                 );
+    }
+
+    public List<GetCategoryBookDto> getBooksByCategoryId(Long categoryId){
+        return categoryRepository.findById(categoryId).map(Category::getBooks)
+                .orElseThrow(()->new NotFoundException("Category with id " + categoryId + " is not exists"))
+                .stream()
+                .map(categoryDtoMapper::mapCategoryToCategoryBookDto)
+                .toList();
     }
 
     @Transactional

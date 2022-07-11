@@ -1,6 +1,10 @@
 package com.example.librarymanagementapi.category;
 
+import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
+import com.example.librarymanagementapi.category.dto.GetCategoryBookDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryDto;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,6 +25,11 @@ public class CategoryController implements CategoryApi {
     @Override
     public GetCategoryDto getCategoryById(Long id) {
         return categoryService.getCategoryById(id);
+    }
+
+    @Override
+    public ResponseEntity<List<GetCategoryBookDto>> getBooksByCategoryId(Long id) {
+        return ResponseEntity.ok(categoryService.getBooksByCategoryId(id));
     }
 
 }
