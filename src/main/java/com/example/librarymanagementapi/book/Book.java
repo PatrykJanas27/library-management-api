@@ -39,6 +39,10 @@ public class Book {
         this.timeAdded = LocalDateTime.now();
     }
 
+    public void addCategoryToCategoryIds(Category category) {
+        categories.add(category);
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -110,4 +114,6 @@ public class Book {
     public void setCategories(List<Category> categories) {
         this.categories = categories;
     }
+
+
 }

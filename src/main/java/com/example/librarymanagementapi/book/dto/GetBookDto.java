@@ -1,6 +1,9 @@
 package com.example.librarymanagementapi.book.dto;
 
+import com.example.librarymanagementapi.category.Category;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class GetBookDto {
     private Long id;
@@ -10,13 +13,22 @@ public class GetBookDto {
     private Long authorId;
     private String authorFirstName;
     private String authorLastName;
+    private List<Category> categories;
 
-    public LocalDateTime getLocalDateTime() {
+    public LocalDateTime getTimeAdded() {
         return timeAdded;
     }
 
-    public void setLocalDateTime(LocalDateTime timeAdded) {
+    public void setTimeAdded(LocalDateTime timeAdded) {
         this.timeAdded = timeAdded;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public String getAuthorLastName() {

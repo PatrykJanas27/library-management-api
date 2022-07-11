@@ -2,15 +2,18 @@ package com.example.librarymanagementapi.book.dto;
 
 import com.example.librarymanagementapi.author.AuthorRepository;
 import com.example.librarymanagementapi.book.Book;
+import com.example.librarymanagementapi.category.CategoryRepository;
 import com.example.librarymanagementapi.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookDtoMapper {
     private final AuthorRepository authorRepository;
+    private final CategoryRepository categoryRepository;
 
-    public BookDtoMapper(AuthorRepository authorRepository) {
+    public BookDtoMapper(AuthorRepository authorRepository, CategoryRepository categoryRepository) {
         this.authorRepository = authorRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public GetBookDto map(Book book) {
@@ -18,10 +21,11 @@ public class BookDtoMapper {
         getBookDto.setId(book.getId());
         getBookDto.setTitle(book.getTitle());
         getBookDto.setDescription(book.getDescription());
-        getBookDto.setLocalDateTime(book.getTimeAdded());
+        getBookDto.setTimeAdded(book.getTimeAdded());
         getBookDto.setAuthorId(book.getAuthor().getId());
         getBookDto.setAuthorFirstName(book.getAuthor().getFirstName());
         getBookDto.setAuthorLastName(book.getAuthor().getLastName());
+        getBookDto.setCategories(book.getCategories());
         return getBookDto;
     }
 
@@ -36,6 +40,14 @@ public class BookDtoMapper {
                             throw new NotFoundException("Author with id " + fillBookDto.getAuthorId() + " is not exists");
                         }
                 );
+        for (Long categoryId : fillBookDto.getCategoryIds()) {
+            categoryRepository.findById(categoryId)
+                    .ifPresentOrElse(book::addCategoryToCategoryIds,
+                    () -> {
+                        throw new NotFoundException("Category with id " + categoryId + " is not exists");
+                    }
+                );
+        }
         return book;
     }
 

@@ -1,10 +1,21 @@
 package com.example.librarymanagementapi.book.dto;
 
+import java.util.List;
+
 public class FillBookDto {
     //    @Size(min=5,max = 63)
     private String title;
     private String description;
     private Long authorId;
+    private List<Long> categoryIds;
+
+    public List<Long> getCategoryIds() {
+        return categoryIds;
+    }
+
+    public void setCategoryIds(List<Long> categoryIds) {
+        this.categoryIds = categoryIds;
+    }
 
     public Long getAuthorId() {
         return authorId;
