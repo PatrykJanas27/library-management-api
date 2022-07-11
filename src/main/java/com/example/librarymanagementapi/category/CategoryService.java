@@ -4,10 +4,7 @@ import com.example.librarymanagementapi.category.dto.CategoryDtoMapper;
 import com.example.librarymanagementapi.category.dto.GetCategoryBookDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,23 +29,12 @@ public class CategoryService {
                 );
     }
 
-    public List<GetCategoryBookDto> getBooksByCategoryId(Long categoryId){
+    public List<GetCategoryBookDto> getBooksByCategoryId(Long categoryId) {
         return categoryRepository.findById(categoryId).map(Category::getBooks)
-                .orElseThrow(()->new NotFoundException("Category with id " + categoryId + " is not exists"))
+                .orElseThrow(() -> new NotFoundException("Category with id " + categoryId + " is not exists"))
                 .stream()
                 .map(categoryDtoMapper::mapCategoryToCategoryBookDto)
                 .toList();
     }
 
-    @Transactional
-    void save(Category category) {
-        categoryRepository.save(category);
-    }
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void fillDB() {
-        save(new Category("Horror"));
-        save(new Category("Fantasy"));
-        save(new Category("Romance"));
-    }
 }

@@ -1,0 +1,62 @@
+//Example data to fill book table in database
+
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "authorId": 1,
+  "categoryIds": [1,11],
+  "description": "Mike Noonan, znany twórca thrillerów, przekonuje się o tym w chwili, kiedy umiera jego żona. Nie ma pojęcia,że ..",
+  "title": "Worek kości"
+}
+
+###
+
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "authorId": 2,
+  "categoryIds": [3, 4],
+  "description": "Lily Bloom to nieszablonowa dziewczyna, która prowadzi nietypową kwiaciarnię odnoszącą sukcesy",
+  "title": "It Ends with Us"
+}
+
+###
+
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "authorId": 3,
+  "categoryIds": [2],
+  "description": "Aerys Targaryen, szalony Smoczy Król, zostaje pokonany. Zamiast niego na Żelaznym Tronie zasiadł",
+  "title": "Gra o tron. Pieśń Lodu i Ognia. Tom 1."
+}
+
+###
+
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "authorId": 4,
+  "categoryIds": [11, 13, 12],
+  "description": "Pewnego wrześniowego dnia w 1966 roku szesnastoletnia Harriet Vanger znika bez śladu. Prawie czter",
+  "title": "Mężczyźni, którzy nienawidzą kobiet"
+}
+
+###
+
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "authorId": 5,
+  "categoryIds": [2, 6],
+  "description": "Siedemnastoletnia Celaena jest wyszkolonym zabójcą, jednym z najlepszych, ale popełniła fatalny błąd.",
+  "title": "Szklany tron"
+}
+
+
+

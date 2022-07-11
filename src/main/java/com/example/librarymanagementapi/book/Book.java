@@ -32,11 +32,12 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, Author author, String description) {
+    public Book(String title, String description,Author author,List<Category> categories) {
         this.title = title;
-        this.author = author;
         this.description = description;
         this.timeAdded = LocalDateTime.now();
+        this.author = author;
+        this.categories=categories;
     }
 
     public void addCategoryToCategoryIds(Category category) {

@@ -5,8 +5,6 @@ import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,14 +48,4 @@ public class AuthorService {
         return authorDtoMapper.map(savedAuthor); //Author to AuthorDto (to showing/getting data)
     }
 
-    @Transactional
-    void save(Author author) {
-        authorRepository.save(author);
-    }
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void fillDB() {
-        save(new Author("Tomek", "Baca"));
-        save(new Author("Patryk", "Janas"));
-    }
 }
