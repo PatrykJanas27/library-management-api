@@ -20,7 +20,7 @@ public class Author {
     @JsonIgnore //to solve the problem for method "List<Author> getAuthors()" of AuthorController
     @OneToMany(
             mappedBy = "author",
-            cascade = CascadeType.ALL
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE}
     )
     List<Book> books = new ArrayList<>();
 

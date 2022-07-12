@@ -27,4 +27,7 @@ public interface AuthorApi {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<GetAuthorDto> saveAuthor(@RequestBody FillAuthorDto fillAuthorDto);
 
+    @DeleteMapping("/{id}")
+    ResponseEntity<?> deleteAuthorById(@PathVariable Long id);
+
 }

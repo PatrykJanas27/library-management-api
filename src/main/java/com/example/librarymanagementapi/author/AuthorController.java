@@ -46,4 +46,10 @@ public class AuthorController implements AuthorApi {
         return ResponseEntity.created(savedAuthorUri).body(savedAuthor);
     }
 
+    @Override
+    public ResponseEntity<?> deleteAuthorById(Long id) {
+        authorService.deleteAuthorById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

@@ -48,4 +48,8 @@ public class AuthorService {
         return authorDtoMapper.map(savedAuthor); //Author to AuthorDto (to showing/getting data)
     }
 
+    @Transactional
+    public void deleteAuthorById(Long id) {
+        authorRepository.deleteById(id);
+    }
 }
