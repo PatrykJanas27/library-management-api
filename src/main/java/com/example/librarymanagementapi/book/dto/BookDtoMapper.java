@@ -41,6 +41,9 @@ public class BookDtoMapper {
                         }
                 );
         for (Long categoryId : fillBookDto.getCategoryIds()) {
+            if(categoryId==null){
+                throw new NotFoundException("Category can not be null");
+            }
             categoryRepository.findById(categoryId)
                     .ifPresentOrElse(book::addCategoryToCategoryIds,
                     () -> {
