@@ -1,12 +1,21 @@
 package com.example.librarymanagementapi.book.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 public class FillBookDto {
-    //    @Size(min=5,max = 63)
+
+    @NotBlank(message = "Title may not be empty") //not null and the trimmed length is greater than zero
+    @Size(max = 255)
     private String title;
+    @Size(max = 255, message = "Description must be shorter than 255 signs")
     private String description;
+    @NotNull(message = "Author id may not be null")
     private Long authorId;
+    @NotNull(message = "List of category ids may not be null")
     private List<Long> categoryIds;
 
     public List<Long> getCategoryIds() {
