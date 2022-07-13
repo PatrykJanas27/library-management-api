@@ -41,4 +41,10 @@ public class BookController implements BookApi {
         return ResponseEntity.created(savedBookUri).body(savedBook);
 //        return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
     }
+
+    @Override
+    public ResponseEntity<?> deleteBookById(Long id) {
+        bookService.deleteBookById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

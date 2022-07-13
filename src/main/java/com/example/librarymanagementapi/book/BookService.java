@@ -38,4 +38,9 @@ public class BookService {
         Book savedBook = bookRepository.save(bookToSave);
         return bookDtoMapper.map(savedBook);
     }
+
+    @Transactional
+    public void deleteBookById(Long id) {
+        bookRepository.deleteById(id);
+    }
 }

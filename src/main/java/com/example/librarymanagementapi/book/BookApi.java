@@ -23,4 +23,7 @@ public interface BookApi {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 //    @ExceptionHandler
     ResponseEntity<GetBookDto> saveBook(@RequestBody @Valid FillBookDto fillBookDto);
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<?> deleteBookById(@PathVariable Long id);
 }
