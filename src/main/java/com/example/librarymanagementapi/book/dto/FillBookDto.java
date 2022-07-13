@@ -8,9 +8,9 @@ import java.util.List;
 public class FillBookDto {
 
     @NotBlank(message = "Title may not be empty or null") //not null and the trimmed length is greater than zero
-    @Size(max = 255, message = "Title must be shorter than 255 signs")
+    @Size(max = 255, message = "Title must be shorter than {max} signs")
     private String title;
-    @Size(max = 255, message = "Description must be shorter than 255 signs")
+    @Size(max = 255, message = "Description must be shorter than {max} signs")
     private String description;
     @NotNull(message = "Author id may not be null")
     private Long authorId;
