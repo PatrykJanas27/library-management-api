@@ -47,4 +47,11 @@ public class BookController implements BookApi {
         bookService.deleteBookById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @Override
+    public ResponseEntity<?> replaceBook(Long id, FillBookDto fillBookDto) {
+        return bookService.replaceBook(id, fillBookDto)
+                .map(c -> ResponseEntity.noContent().build())
+                .orElse(ResponseEntity.notFound().build());
+    }
 }

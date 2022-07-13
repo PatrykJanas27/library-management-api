@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -42,5 +43,17 @@ public class BookService {
     @Transactional
     public void deleteBookById(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<?> replaceBook(Long id, FillBookDto fillBookDto) {
+        if (!bookRepository.existsById(id)) {
+            return Optional.empty();
+        }
+        Book bookToUpdate = bookDtoMapper.map(fillBookDto);
+        bookToUpdate.setId(id);
+        bookToUpdate.setTimeAdded(LocalDateTime.now());
+        Book updatedEntity = bookRepository.save(bookToUpdate);
+        return Optional.of(bookDtoMapper.map(updatedEntity));
     }
 }

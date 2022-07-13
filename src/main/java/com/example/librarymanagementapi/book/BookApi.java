@@ -26,4 +26,7 @@ public interface BookApi {
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteBookById(@PathVariable Long id);
+
+    @PutMapping("/{id}")
+    ResponseEntity<?> replaceBook(@PathVariable Long id, @Valid @RequestBody FillBookDto fillBookDto);
 }
