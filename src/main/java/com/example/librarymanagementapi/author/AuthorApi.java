@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -25,7 +26,7 @@ public interface AuthorApi {
     ResponseEntity<List<GetAuthorBookDto>> getBooksByAuthorId(@PathVariable Long id);
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<GetAuthorDto> saveAuthor(@RequestBody FillAuthorDto fillAuthorDto);
+    ResponseEntity<GetAuthorDto> saveAuthor(@Valid @RequestBody FillAuthorDto fillAuthorDto);
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteAuthorById(@PathVariable Long id);

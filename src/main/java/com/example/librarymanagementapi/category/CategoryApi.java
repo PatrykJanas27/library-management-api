@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/categories")
@@ -24,7 +25,7 @@ public interface CategoryApi {
     ResponseEntity<List<GetCategoryBookDto>> getBooksByCategoryId(@PathVariable Long id);
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<GetCategoryDto> saveCategory(@RequestBody FillCategoryDto fillCategoryDto);
+    ResponseEntity<GetCategoryDto> saveCategory(@Valid @RequestBody FillCategoryDto fillCategoryDto);
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteCategoryById(@PathVariable Long id);
