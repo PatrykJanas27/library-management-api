@@ -1,11 +1,9 @@
 package com.example.librarymanagementapi.category;
 
-import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.category.dto.FillCategoryDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryBookDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -43,6 +41,12 @@ public class CategoryController implements CategoryApi {
                 .buildAndExpand(savedCategory.getId())
                 .toUri();
         return ResponseEntity.created(savedCategoryUri).body(savedCategory);
+    }
+
+    @Override
+    public ResponseEntity<?> deleteCategoryById(Long id) {
+        categoryService.deleteCategoryById(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

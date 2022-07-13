@@ -26,4 +26,6 @@ public interface CategoryApi {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<GetCategoryDto> saveCategory(@RequestBody FillCategoryDto fillCategoryDto);
 
+    @DeleteMapping("/{id}")
+    ResponseEntity<?> deleteCategoryById(@PathVariable Long id);
 }

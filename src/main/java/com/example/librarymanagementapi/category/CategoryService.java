@@ -1,8 +1,5 @@
 package com.example.librarymanagementapi.category;
 
-import com.example.librarymanagementapi.author.Author;
-import com.example.librarymanagementapi.author.dto.FillAuthorDto;
-import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.category.dto.CategoryDtoMapper;
 import com.example.librarymanagementapi.category.dto.FillCategoryDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryBookDto;
@@ -49,4 +46,8 @@ public class CategoryService {
         return categoryDtoMapper.map(savedCategory);
     }
 
+    @Transactional
+    public void deleteCategoryById(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }

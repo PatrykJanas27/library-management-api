@@ -17,7 +17,7 @@ public class Category {
     private String name;
 
     @JsonIgnore //to solve the problem for method "public List<Category> getCategories()" of CategoryController
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories" , cascade = CascadeType.REMOVE)
     private List<Book> books = new ArrayList<>();
 
     public Category() {
