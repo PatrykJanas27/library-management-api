@@ -4,11 +4,15 @@ import com.example.librarymanagementapi.author.dto.AuthorDtoMapper;
 import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorDto;
+import com.example.librarymanagementapi.book.Book;
+import com.example.librarymanagementapi.book.dto.FillBookDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthorService {
@@ -51,5 +55,16 @@ public class AuthorService {
     @Transactional
     public void deleteAuthorById(Long id) {
         authorRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<?> replaceAuthor(Long id, FillAuthorDto fillAuthorDto) {
+        if (!authorRepository.existsById(id)) {
+            return Optional.empty();
+        }
+        Author authorToUpdate = authorDtoMapper.map(fillAuthorDto);
+        authorToUpdate.setId(id);
+        Author updatedAuthor = authorRepository.save(authorToUpdate);
+        return Optional.of(authorDtoMapper.map(updatedAuthor));
     }
 }
