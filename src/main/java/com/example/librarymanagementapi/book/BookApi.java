@@ -20,8 +20,10 @@ public interface BookApi {
     @GetMapping("/{id}")
     GetBookDto getBookById(@PathVariable Long id);
 
+    @GetMapping("/title")
+    List<GetBookDto> getBooksByTitle(@RequestParam String title);
+
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    @ExceptionHandler
     ResponseEntity<GetBookDto> saveBook(@RequestBody @Valid FillBookDto fillBookDto);
 
     @DeleteMapping("/{id}")

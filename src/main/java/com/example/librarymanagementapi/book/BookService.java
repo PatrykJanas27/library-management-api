@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -30,6 +31,19 @@ public class BookService {
                 .orElseThrow(
                         () -> new NotFoundException("Book with id " + id + " is not exists")
                 );
+    }
+
+    public List<GetBookDto> getBooksByTitle(String title) {
+        List<GetBookDto> listOfBooksByTitle = bookRepository
+                .findAllByTitle(title)
+                .stream()
+                .map(bookDtoMapper::map)
+                .collect(Collectors.toList());
+        if (listOfBooksByTitle.isEmpty()) {
+            throw new NotFoundException("Book with title '" + title + "' is not exists");
+        } else {
+            return listOfBooksByTitle;
+        }
     }
 
     @Transactional

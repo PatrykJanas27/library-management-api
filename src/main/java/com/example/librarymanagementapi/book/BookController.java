@@ -2,10 +2,10 @@ package com.example.librarymanagementapi.book;
 
 import com.example.librarymanagementapi.book.dto.FillBookDto;
 import com.example.librarymanagementapi.book.dto.GetBookDto;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -29,6 +29,11 @@ public class BookController implements BookApi {
     @Override
     public GetBookDto getBookById(@PathVariable Long id) {
         return bookService.getBookById(id);
+    }
+
+    @Override
+    public List<GetBookDto> getBooksByTitle(@RequestParam String title) {
+        return bookService.getBooksByTitle(title);
     }
 
     @Override
