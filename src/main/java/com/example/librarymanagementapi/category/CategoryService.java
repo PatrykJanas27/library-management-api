@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService {
@@ -49,5 +50,16 @@ public class CategoryService {
     @Transactional
     public void deleteCategoryById(Long id) {
         categoryRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Optional<?> replaceCategory(Long id, FillCategoryDto fillCategoryDto) {
+        if (!categoryRepository.existsById(id)) {
+            return Optional.empty();
+        }
+        Category categoryToUpdate = categoryDtoMapper.map(fillCategoryDto);
+        categoryToUpdate.setId(id);
+        Category updatedCategory = categoryRepository.save(categoryToUpdate);
+        return Optional.of(categoryDtoMapper.map(updatedCategory));
     }
 }

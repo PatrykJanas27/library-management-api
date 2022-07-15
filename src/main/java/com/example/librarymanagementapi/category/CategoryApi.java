@@ -1,5 +1,6 @@
 package com.example.librarymanagementapi.category;
 
+import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import com.example.librarymanagementapi.category.dto.FillCategoryDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryBookDto;
 import com.example.librarymanagementapi.category.dto.GetCategoryDto;
@@ -29,4 +30,7 @@ public interface CategoryApi {
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteCategoryById(@PathVariable Long id);
+
+    @PutMapping("/{id}")
+    ResponseEntity<?> replaceCategory(@PathVariable Long id, @Valid @RequestBody FillCategoryDto fillCategoryDto);
 }
