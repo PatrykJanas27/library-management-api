@@ -47,7 +47,7 @@ public class BookService {
     }
 
     @Transactional
-    GetBookDto saveBook(FillBookDto fillBookDto) {
+    public GetBookDto saveBook(FillBookDto fillBookDto) {
         Book bookToSave = bookDtoMapper.map(fillBookDto);
         bookToSave.setTimeAdded(LocalDateTime.now());
         Book savedBook = bookRepository.save(bookToSave);

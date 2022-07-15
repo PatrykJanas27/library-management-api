@@ -40,7 +40,7 @@ public class CategoryService {
     }
 
     @Transactional
-    GetCategoryDto saveCategory(FillCategoryDto fillCategoryDto) {
+    public GetCategoryDto saveCategory(FillCategoryDto fillCategoryDto) {
         Category categoryToSave = categoryDtoMapper.map(fillCategoryDto);
         Category savedCategory = categoryRepository.save(categoryToSave);
         return categoryDtoMapper.map(savedCategory);

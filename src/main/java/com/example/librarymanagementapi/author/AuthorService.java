@@ -42,7 +42,7 @@ public class AuthorService {
     }
 
     @Transactional
-    GetAuthorDto saveAuthor(FillAuthorDto fillAuthorDto) {
+    public GetAuthorDto saveAuthor(FillAuthorDto fillAuthorDto) {
         Author authorToSave = authorDtoMapper.map(fillAuthorDto);
         Author savedAuthor = authorRepository.save(authorToSave);
         return authorDtoMapper.map(savedAuthor); //Author to AuthorDto (to showing/getting data)
