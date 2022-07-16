@@ -23,7 +23,7 @@ public class CategoryController implements CategoryApi {
     }
 
     @Override
-    public List<Category> getCategories() {
+    public List<GetCategoryDto> getCategories() {
         return categoryService.getCategories();
     }
 

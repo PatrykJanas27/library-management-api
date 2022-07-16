@@ -8,6 +8,7 @@ import com.example.librarymanagementapi.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,8 +22,13 @@ public class CategoryService {
         this.categoryDtoMapper = categoryDtoMapper;
     }
 
-    public List<Category> getCategories() {
-        return categoryRepository.findAll();
+    public List<GetCategoryDto> getCategories() {
+        List<GetCategoryDto> listOfGetCategoryDto = new ArrayList<>();
+        Iterable<Category> categories = categoryRepository.findAll();
+        for (Category category : categories) {
+            listOfGetCategoryDto.add(categoryDtoMapper.map(category));
+        }
+        return listOfGetCategoryDto;
     }
 
     public GetCategoryDto getCategoryById(Long id) {
