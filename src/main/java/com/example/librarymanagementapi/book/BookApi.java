@@ -15,7 +15,7 @@ public interface BookApi {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<Book> getBooks();
+    List<GetBookDto> getBooks();
 
     @GetMapping("/{id}")
     GetBookDto getBookById(@PathVariable Long id);

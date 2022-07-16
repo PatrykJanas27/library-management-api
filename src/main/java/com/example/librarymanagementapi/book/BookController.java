@@ -22,7 +22,7 @@ public class BookController implements BookApi {
     }
 
     @Override
-    public List<Book> getBooks() {
+    public List<GetBookDto> getBooks() {
         return bookService.getBooks();
     }
 

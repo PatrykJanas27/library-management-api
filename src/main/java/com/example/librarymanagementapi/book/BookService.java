@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,8 +23,13 @@ public class BookService {
         this.bookDtoMapper = bookDtoMapper;
     }
 
-    public List<Book> getBooks() {
-        return bookRepository.findAll();
+    public List<GetBookDto> getBooks() {
+        List<GetBookDto> listOfGetBookDto= new ArrayList<>();
+        Iterable<Book> books = bookRepository.findAll();
+        for (Book book : books) {
+            listOfGetBookDto.add(bookDtoMapper.map(book));
+        }
+        return listOfGetBookDto;
     }
 
     public GetBookDto getBookById(Long id) {
@@ -67,7 +73,7 @@ public class BookService {
         Book bookToUpdate = bookDtoMapper.map(fillBookDto);
         bookToUpdate.setId(id);
         bookToUpdate.setTimeAdded(LocalDateTime.now());
-        Book updatedEntity = bookRepository.save(bookToUpdate);
-        return Optional.of(bookDtoMapper.map(updatedEntity));
+        Book updatedBook = bookRepository.save(bookToUpdate);
+        return Optional.of(bookDtoMapper.map(updatedBook));
     }
 }
