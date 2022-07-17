@@ -37,7 +37,7 @@ public class BookController implements BookApi {
     }
 
     @Override
-    public ResponseEntity<GetBookDto> saveBook(@Valid @RequestBody FillBookDto fillBookDto) {
+    public ResponseEntity<GetBookDto> saveBook(@RequestBody FillBookDto fillBookDto) {
         GetBookDto savedBook = bookService.saveBook(fillBookDto);
         URI savedBookUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

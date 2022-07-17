@@ -54,7 +54,7 @@ public class CategoryController implements CategoryApi {
     }
 
     @Override
-    public ResponseEntity<?> replaceCategory(@PathVariable Long id, @Valid @RequestBody FillCategoryDto fillCategoryDto){
+    public ResponseEntity<?> replaceCategory(@PathVariable Long id, @RequestBody FillCategoryDto fillCategoryDto){
         return categoryService.replaceCategory(id, fillCategoryDto)
                 .map(c -> ResponseEntity.noContent().build())
                 .orElse(ResponseEntity.notFound().build());

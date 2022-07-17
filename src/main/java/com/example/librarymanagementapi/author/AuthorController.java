@@ -54,7 +54,7 @@ public class AuthorController implements AuthorApi {
     }
 
     @Override
-    public ResponseEntity<?> replaceAuthor(@PathVariable Long id, @Valid @RequestBody FillAuthorDto fillAuthorDto){
+    public ResponseEntity<?> replaceAuthor(@PathVariable Long id, @RequestBody FillAuthorDto fillAuthorDto){
         return authorService.replaceAuthor(id, fillAuthorDto)
                 .map(c -> ResponseEntity.noContent().build())
                 .orElse(ResponseEntity.notFound().build());
