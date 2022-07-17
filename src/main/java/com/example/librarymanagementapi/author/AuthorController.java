@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class AuthorController implements AuthorApi {
 
     //here is a little problem because of relation loop - an author has a List of books and books have the author
     @Override
-    public List<Author> getAuthors() {
+    public List<GetAuthorDto> getAuthors() {
         return authorService.getAuthors();
     }
 
@@ -54,7 +53,7 @@ public class AuthorController implements AuthorApi {
     }
 
     @Override
-    public ResponseEntity<?> replaceAuthor(@PathVariable Long id, @RequestBody FillAuthorDto fillAuthorDto){
+    public ResponseEntity<?> replaceAuthor(@PathVariable Long id, @RequestBody FillAuthorDto fillAuthorDto) {
         return authorService.replaceAuthor(id, fillAuthorDto)
                 .map(c -> ResponseEntity.noContent().build())
                 .orElse(ResponseEntity.notFound().build());

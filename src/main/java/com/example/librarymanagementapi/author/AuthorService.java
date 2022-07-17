@@ -4,13 +4,11 @@ import com.example.librarymanagementapi.author.dto.AuthorDtoMapper;
 import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorDto;
-import com.example.librarymanagementapi.book.Book;
-import com.example.librarymanagementapi.book.dto.FillBookDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +22,12 @@ public class AuthorService {
         this.authorDtoMapper = authorMapper;
     }
 
-    public List<Author> getAuthors() {
-        return authorRepository.findAll();
+    public List<GetAuthorDto> getAuthors() {
+        List<GetAuthorDto> listOfGetAuthorDto = new ArrayList<>();
+        for (Author author : authorRepository.findAll()) {
+            listOfGetAuthorDto.add(authorDtoMapper.map(author));
+        }
+        return listOfGetAuthorDto;
     }
 
     public GetAuthorDto getAuthorById(Long id) {
