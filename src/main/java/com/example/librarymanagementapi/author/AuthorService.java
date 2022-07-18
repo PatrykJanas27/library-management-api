@@ -5,6 +5,7 @@ import com.example.librarymanagementapi.author.dto.FillAuthorDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorBookDto;
 import com.example.librarymanagementapi.author.dto.GetAuthorDto;
 import com.example.librarymanagementapi.exception.NotFoundException;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +57,9 @@ public class AuthorService {
 
     @Transactional
     public void deleteAuthorById(Long id) {
+        if (!authorRepository.existsById(id)) {
+            throw new NotFoundException("Author with id " + id + " is not exists");
+        }
         authorRepository.deleteById(id);
     }
 

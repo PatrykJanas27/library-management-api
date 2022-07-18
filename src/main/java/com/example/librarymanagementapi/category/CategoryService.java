@@ -55,6 +55,9 @@ public class CategoryService {
 
     @Transactional
     public void deleteCategoryById(Long id) {
+        if (!categoryRepository.existsById(id)){
+            throw new NotFoundException("Category with id " + id + " is not exists");
+        }
         categoryRepository.deleteById(id);
     }
 

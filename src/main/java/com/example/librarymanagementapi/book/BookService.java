@@ -62,6 +62,9 @@ public class BookService {
 
     @Transactional
     public void deleteBookById(Long id) {
+        if (!bookRepository.existsById(id)){
+            throw new NotFoundException("Book with id " + id + " is not exists");
+        }
         bookRepository.deleteById(id);
     }
 
